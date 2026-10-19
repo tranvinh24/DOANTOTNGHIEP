@@ -21,4 +21,8 @@ public class ReportEvidence {
 
     @Column(name = "image_url", length = 1000)
     private String imageUrl;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 }

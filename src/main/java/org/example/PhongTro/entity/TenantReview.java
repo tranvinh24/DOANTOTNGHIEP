@@ -40,6 +40,10 @@ public class TenantReview {
     @JoinColumn(name = "hidden_by")
     private User hiddenBy;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

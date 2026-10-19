@@ -20,4 +20,8 @@ public class Amenity {
 
     @Column(length = 255)
     private String icon;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 }

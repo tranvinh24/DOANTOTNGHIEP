@@ -23,4 +23,8 @@ public class RolePermission {
     @MapsId("permissionId")
     @JoinColumn(name = "permission_id")
     private Permission permission;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 }

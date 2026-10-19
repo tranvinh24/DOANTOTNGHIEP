@@ -46,6 +46,10 @@ public class TenantProfile {
     @JoinColumn(name = "desired_room_type_id")
     private RoomType desiredRoomType;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }

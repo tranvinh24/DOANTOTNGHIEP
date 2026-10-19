@@ -25,6 +25,10 @@ public class SavedListing {
     @JoinColumn(name = "listing_id")
     private Listing listing;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

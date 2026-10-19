@@ -2,6 +2,7 @@ package org.example.PhongTro.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.PhongTro.enums.AgreementStatus;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -49,8 +50,12 @@ public class RentalAgreement {
     @Column(name = "terms_text", columnDefinition = "TEXT")
     private String termsText;
 
+    @Column(name = "contract_file_url", length = 500)
+    private String contractFileUrl;
+
+    @Enumerated(EnumType.STRING)
     @Column(length = 50)
-    private String status;
+    private AgreementStatus status;
 
     @Column(name = "created_by_role", length = 50)
     private String createdByRole;
@@ -60,6 +65,10 @@ public class RentalAgreement {
 
     @Column(name = "tenant_confirmed_at")
     private LocalDateTime tenantConfirmedAt;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

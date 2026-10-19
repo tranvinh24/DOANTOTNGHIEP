@@ -22,6 +22,10 @@ public class Role {
     @Column(nullable = false, length = 255)
     private String name;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

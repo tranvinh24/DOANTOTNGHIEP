@@ -23,4 +23,8 @@ public class RoomAmenity {
     @MapsId("amenityId")
     @JoinColumn(name = "amenity_id")
     private Amenity amenity;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 }

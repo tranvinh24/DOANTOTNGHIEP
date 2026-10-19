@@ -24,4 +24,8 @@ public class RoomImage {
 
     @Column(name = "sort_order")
     private Integer sortOrder;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 }

@@ -41,6 +41,10 @@ public class BoostServicePackageSubscription {
     @Column(precision = 15, scale = 2)
     private BigDecimal price;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

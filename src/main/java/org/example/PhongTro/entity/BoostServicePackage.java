@@ -43,6 +43,10 @@ public class BoostServicePackage {
     @JoinColumn(name = "updated_by")
     private User updatedBy;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

@@ -24,4 +24,8 @@ public class Ward {
 
     @Column(nullable = false, length = 255)
     private String name;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 }

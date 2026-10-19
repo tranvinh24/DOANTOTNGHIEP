@@ -35,6 +35,10 @@ public class ChatConversation {
     @Column(name = "last_message_at")
     private LocalDateTime lastMessageAt;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

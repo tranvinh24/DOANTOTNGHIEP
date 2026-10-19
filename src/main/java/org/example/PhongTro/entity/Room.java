@@ -55,6 +55,10 @@ public class Room {
     @Column(name = "rental_status", length = 50)
     private String rentalStatus;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 

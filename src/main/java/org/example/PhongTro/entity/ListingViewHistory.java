@@ -27,4 +27,8 @@ public class ListingViewHistory {
 
     @Column(name = "viewed_at")
     private LocalDateTime viewedAt;
+
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
 }

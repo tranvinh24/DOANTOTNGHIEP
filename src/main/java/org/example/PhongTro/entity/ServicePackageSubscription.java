@@ -33,6 +33,10 @@ public class ServicePackageSubscription {
     @Column(length = 50)
     private String status;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

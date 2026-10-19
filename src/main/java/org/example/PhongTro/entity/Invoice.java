@@ -45,6 +45,10 @@ public class Invoice {
     @Column(name = "issued_at")
     private LocalDateTime issuedAt;
 
+    @Builder.Default
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted = false;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

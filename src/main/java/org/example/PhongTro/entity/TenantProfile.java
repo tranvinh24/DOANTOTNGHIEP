@@ -26,10 +26,6 @@ public class TenantProfile {
     @JoinColumn(name = "desired_province_id")
     private Province desiredProvince;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "desired_district_id")
-    private District desiredDistrict;
-
     @Column(name = "price_min", precision = 15, scale = 2)
     private BigDecimal priceMin;
 

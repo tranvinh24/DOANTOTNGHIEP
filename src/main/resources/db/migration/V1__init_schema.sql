@@ -80,27 +80,15 @@ CREATE TABLE IF NOT EXISTS `provinces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------
--- 7. districts
--- -----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `districts` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `province_id` BIGINT NOT NULL,
-    `code` VARCHAR(50) NOT NULL,
-    `name` VARCHAR(255) NOT NULL,
-    `is_deleted` BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT `fk_districts_province` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- -----------------------------------------------------------------------------
--- 8. wards
+-- 7. wards (communes)
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `wards` (
     `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `district_id` BIGINT NOT NULL,
-    `code` VARCHAR(50) NOT NULL,
+    `province_id` BIGINT NOT NULL,
+    `code` VARCHAR(50) NOT NULL UNIQUE,
     `name` VARCHAR(255) NOT NULL,
     `is_deleted` BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT `fk_wards_district` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`)
+    CONSTRAINT `fk_wards_province` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -----------------------------------------------------------------------------
@@ -188,7 +176,6 @@ CREATE TABLE IF NOT EXISTS `service_package_subscriptions` (
 CREATE TABLE IF NOT EXISTS `tenant_profiles` (
     `user_id` BIGINT PRIMARY KEY,
     `desired_province_id` BIGINT NULL,
-    `desired_district_id` BIGINT NULL,
     `price_min` DECIMAL(15, 2) NULL,
     `price_max` DECIMAL(15, 2) NULL,
     `area_min` DECIMAL(10, 2) NULL,
@@ -198,7 +185,6 @@ CREATE TABLE IF NOT EXISTS `tenant_profiles` (
     `updated_at` DATETIME NULL,
     CONSTRAINT `fk_tenant_profiles_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
     CONSTRAINT `fk_tenant_profiles_province` FOREIGN KEY (`desired_province_id`) REFERENCES `provinces` (`id`),
-    CONSTRAINT `fk_tenant_profiles_district` FOREIGN KEY (`desired_district_id`) REFERENCES `districts` (`id`),
     CONSTRAINT `fk_tenant_profiles_room_type` FOREIGN KEY (`desired_room_type_id`) REFERENCES `room_types` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -212,7 +198,6 @@ CREATE TABLE IF NOT EXISTS `rooms` (
     `price` DECIMAL(15, 2) NULL,
     `area_m2` DECIMAL(10, 2) NULL,
     `province_id` BIGINT NULL,
-    `district_id` BIGINT NULL,
     `ward_id` BIGINT NULL,
     `address_line` VARCHAR(500) NULL,
     `latitude` DECIMAL(10, 7) NULL,
@@ -225,7 +210,6 @@ CREATE TABLE IF NOT EXISTS `rooms` (
     CONSTRAINT `fk_rooms_landlord` FOREIGN KEY (`landlord_id`) REFERENCES `users` (`id`),
     CONSTRAINT `fk_rooms_room_type` FOREIGN KEY (`room_type_id`) REFERENCES `room_types` (`id`),
     CONSTRAINT `fk_rooms_province` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`),
-    CONSTRAINT `fk_rooms_district` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`),
     CONSTRAINT `fk_rooms_ward` FOREIGN KEY (`ward_id`) REFERENCES `wards` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
